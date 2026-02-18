@@ -18,33 +18,23 @@
     <main class="card">
       <h1>🦁 Il leone</h1>
       <div class="svg-wrap" aria-hidden="true">
-        <!-- Semplice illustrazione SVG stilizzata di un leone -->
+        <!-- Illustrazione inline: mantiene compatibilità per chi non carica immagini esterne -->
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrazione stilizzata di un leone">
           <defs>
             <circle id="face" cx="100" cy="100" r="40" />
           </defs>
-          <!-- Criniera -->
-          <g fill="#E2A83F">
-            <circle cx="100" cy="100" r="64"/>
-          </g>
-          <!-- Viso -->
-          <g fill="#F5D39A">
-            <use href="#face" />
-          </g>
-          <!-- Occhi -->
-          <g fill="#3b2b2b">
-            <ellipse cx="88" cy="94" rx="4" ry="6" />
-            <ellipse cx="112" cy="94" rx="4" ry="6" />
-          </g>
-          <!-- Naso e bocca -->
-          <g fill="#6b3b2b">
-            <path d="M98 106 Q100 110 102 106 Q100 112 98 106" />
-            <ellipse cx="100" cy="106" rx="6" ry="4" fill="#6b3b2b"/>
-          </g>
-          <!-- Sorriso semplice -->
+          <g fill="#E2A83F"><circle cx="100" cy="100" r="64"/></g>
+          <g fill="#F5D39A"><use href="#face" /></g>
+          <g fill="#3b2b2b"><ellipse cx="88" cy="94" rx="4" ry="6" /><ellipse cx="112" cy="94" rx="4" ry="6" /></g>
+          <g fill="#6b3b2b"><path d="M98 106 Q100 110 102 106 Q100 112 98 106" /><ellipse cx="100" cy="106" rx="6" ry="4"/></g>
           <path d="M90 116 Q100 123 110 116" stroke="#6b3b2b" stroke-width="2" fill="none" stroke-linecap="round"/>
         </svg>
       </div>
+
+      <figure style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:0">
+        <img src="images/lion1.svg" alt="Illustrazione leone 1" style="width:160px;border-radius:8px;border:1px solid #eee;padding:.5rem;background:#fff"/>
+        <img src="images/lion2.svg" alt="Illustrazione leone 2" style="width:160px;border-radius:8px;border:1px solid #eee;padding:.5rem;background:#fff"/>
+      </figure>
 
       <p class="meta">Descrizione breve</p>
       <p>
