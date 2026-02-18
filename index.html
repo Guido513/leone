@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Il Leone</title>
+    <style>
+      body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:2rem;background:#fff;color:#222}
+      .card{max-width:700px;margin:0 auto;padding:1.5rem;border-radius:12px;border:1px solid #eee;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+      h1{display:flex;align-items:center;gap:.6rem;font-size:1.6rem;margin:0 0 .6rem}
+      p{line-height:1.5;margin:.6rem 0}
+      .meta{color:#555;font-size:.95rem}
+      .svg-wrap{display:flex;justify-content:center;margin:1rem 0}
+      svg{width:200px;height:auto}
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>🦁 Il leone</h1>
+      <div class="svg-wrap" aria-hidden="true">
+        <!-- Semplice illustrazione SVG stilizzata di un leone -->
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrazione stilizzata di un leone">
+          <defs>
+            <circle id="face" cx="100" cy="100" r="40" />
+          </defs>
+          <!-- Criniera -->
+          <g fill="#E2A83F">
+            <circle cx="100" cy="100" r="64"/>
+          </g>
+          <!-- Viso -->
+          <g fill="#F5D39A">
+            <use href="#face" />
+          </g>
+          <!-- Occhi -->
+          <g fill="#3b2b2b">
+            <ellipse cx="88" cy="94" rx="4" ry="6" />
+            <ellipse cx="112" cy="94" rx="4" ry="6" />
+          </g>
+          <!-- Naso e bocca -->
+          <g fill="#6b3b2b">
+            <path d="M98 106 Q100 110 102 106 Q100 112 98 106" />
+            <ellipse cx="100" cy="106" rx="6" ry="4" fill="#6b3b2b"/>
+          </g>
+          <!-- Sorriso semplice -->
+          <path d="M90 116 Q100 123 110 116" stroke="#6b3b2b" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <p class="meta">Descrizione breve</p>
+      <p>
+        Il leone (Panthera leo) è un grande felino noto per la sua criniera e il ruolo di predatore apice nelle savane e nelle praterie dell'Africa subsahariana. I leoni vivono in gruppi sociali chiamati branchi, guidati da femmine parenti tra loro; i maschi proteggono il territorio e i cuccioli.
+      </p>
+
+      <p>
+        Sono carnivori opportunisti: cacciano erbivori di medie e grandi dimensioni, spesso con tattiche di cooperazione tra le femmine. Il loro verso caratteristico è il ruggito, udibile a grandi distanze e utilizzato per comunicare e marcare il territorio.
+      </p>
+
+      <p>
+        Il leone è anche simbolo culturale: rappresenta forza, coraggio e regalità in molte tradizioni umane. Tuttavia molte popolazioni di leoni sono minacciate da perdita di habitat, conflitti con l'uomo e caccia.
+      </p>
+
+      <p class="meta">Vuoi aprirlo nel browser? Apri il file <a href="index.html">index.html</a>.</p>
+    </main>
+  </body>
+</html>
