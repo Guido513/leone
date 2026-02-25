@@ -3,64 +3,602 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Il Leone</title>
+    <title>Il Leone - Re della Savana</title>
     <style>
-      body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:2rem;background:#fff;color:#222}
-      .card{max-width:700px;margin:0 auto;padding:1.5rem;border-radius:12px;border:1px solid #eee;box-shadow:0 6px 24px rgba(0,0,0,.06)}
-      h1{display:flex;align-items:center;gap:.6rem;font-size:1.6rem;margin:0 0 .6rem}
-      p{line-height:1.5;margin:.6rem 0}
-      .meta{color:#555;font-size:.95rem}
-      .svg-wrap{display:flex;justify-content:center;margin:1rem 0}
-      svg{width:200px;height:auto}
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: #eee;
+        line-height: 1.6;
+      }
+      
+      /* Header Hero */
+      header {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        padding: 4rem 2rem;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,64L100,80L200,64L300,80L400,48L500,64L600,80L700,48L800,64L900,80L1000,48L1100,64L1200,80L1200,120L0,120Z" fill="rgba(255,255,255,0.05)"></path></svg>');
+        background-repeat: repeat-x;
+        animation: wave 15s linear infinite;
+      }
+      
+      @keyframes wave {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(1200px); }
+      }
+      
+      header h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 1;
+        animation: slideDown 0.8s ease-out, glow 2.5s ease-in-out infinite;
+      }
+      
+      @keyframes slideDown {
+        from { transform: translateY(-30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      
+      @keyframes fadeInUp {
+        from { 
+          opacity: 0; 
+          transform: translateY(30px); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translateY(0); 
+        }
+      }
+      
+      @keyframes pulse {
+        0%, 100% { 
+          box-shadow: 0 0 0 0 rgba(255,215,0,0.7); 
+        }
+        50% { 
+          box-shadow: 0 0 0 10px rgba(255,215,0,0); 
+        }
+      }
+      
+      @keyframes glow {
+        0%, 100% { 
+          text-shadow: 0 0 5px rgba(255,215,0,0.5); 
+        }
+        50% { 
+          text-shadow: 0 0 20px rgba(255,215,0,0.9); 
+        }
+      }
+      
+      @keyframes scaleIn {
+        from { 
+          opacity: 0; 
+          transform: scale(0.8); 
+        }
+        to { 
+          opacity: 1; 
+          transform: scale(1); 
+        }
+      }
+      
+      @keyframes slideInLeft {
+        from { 
+          opacity: 0; 
+          transform: translateX(-50px); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translateX(0); 
+        }
+      }
+      
+      @keyframes slideInRight {
+        from { 
+          opacity: 0; 
+          transform: translateX(50px); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translateX(0); 
+        }
+      }
+      
+      @keyframes float {
+        0%, 100% { 
+          transform: translateY(0px); 
+        }
+        50% { 
+          transform: translateY(-10px); 
+        }
+      }
+      
+      /* Main Container */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      
+      /* Gallery Section */
+      .gallery-section {
+        margin: 3rem 0;
+      }
+      
+      .gallery-title {
+        font-size: 2.2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #FFD700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        animation: slideInLeft 0.8s ease-out;
+      }
+      
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+      
+      .gallery-card {
+        background: rgba(255,255,255,0.05);
+        border-radius: 15px;
+        overflow: hidden;
+        border: 2px solid #D2691E;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        animation: scaleIn 0.6s ease-out forwards;
+      }
+      
+      .gallery-card:nth-child(1) { animation-delay: 0.1s; }
+      .gallery-card:nth-child(2) { animation-delay: 0.2s; }
+      .gallery-card:nth-child(3) { animation-delay: 0.3s; }
+      
+      .gallery-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 16px 32px rgba(210,105,30,0.4);
+        border-color: #FFD700;
+        animation: pulse 1.5s ease-out infinite;
+      }
+      
+      .gallery-card img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+      
+      .gallery-card:hover img {
+        transform: scale(1.1);
+      }
+      
+      .gallery-caption {
+        padding: 1.5rem;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #FFD700;
+      }
+      
+      /* Content Sections */
+      .content-section {
+        background: rgba(255,255,255,0.08);
+        border-radius: 15px;
+        padding: 2.5rem;
+        margin: 2rem 0;
+        border-left: 5px solid #D2691E;
+        backdrop-filter: blur(10px);
+        animation: fadeInUp 0.8s ease-out;
+        transition: all 0.3s ease;
+      }
+      
+      .content-section:hover {
+        background: rgba(255,255,255,0.12);
+        border-left-color: #FFD700;
+        box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
+      }
+      
+      .content-section h2 {
+        font-size: 2rem;
+        color: #FFD700;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #D2691E;
+        animation: slideInLeft 0.6s ease-out;
+      }
+      
+      .content-section h3 {
+        font-size: 1.3rem;
+        color: #FFB347;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        animation: slideInLeft 0.6s ease-out;
+      }
+      
+      .content-section p {
+        margin-bottom: 1rem;
+        text-align: justify;
+        color: #ddd;
+        font-size: 0.95rem;
+        line-height: 1.8;
+      }
+      
+      /* Feature List */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+      
+      .feature-box {
+        background: rgba(255,215,0,0.1);
+        border: 2px solid #FFD700;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        animation: scaleIn 0.6s ease-out;
+      }
+      
+      .feature-box:nth-child(1) { animation-delay: 0.1s; }
+      .feature-box:nth-child(2) { animation-delay: 0.2s; }
+      .feature-box:nth-child(3) { animation-delay: 0.3s; }
+      .feature-box:nth-child(4) { animation-delay: 0.4s; }
+      
+      .feature-box:hover {
+        background: rgba(255,215,0,0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+        border-color: #fff;
+      }
+      
+      .feature-box h4 {
+        color: #FFD700;
+        margin-bottom: 0.8rem;
+        font-size: 1.15rem;
+      }
+      
+      .feature-box p {
+        color: #ddd;
+        font-size: 0.9rem;
+      }
+      
+      /* Footer */
+      footer {
+        background: rgba(0,0,0,0.4);
+        text-align: center;
+        padding: 2rem;
+        margin-top: 3rem;
+        border-top: 2px solid #D2691E;
+        color: #aaa;
+        animation: slideInUp 0.8s ease-out;
+      }
+      
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      footer p {
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+      }
+      
+      footer p:first-child {
+        animation: glow 2.5s ease-in-out infinite;
+      }
+      
+      footer p:hover {
+        color: #FFD700;
+      }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2.2rem;
+        }
+        
+        .container {
+          padding: 1rem;
+        }
+        
+        .content-section {
+          padding: 1.5rem;
+        }
+      }
+      
+      /* Header Paragraph Animation */
+      header p {
+        animation: fadeInUp 1s ease-out 0.3s forwards;
+        opacity: 0;
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Add some glowing borders on hover */
+      .content-section:hover h2 {
+        color: #FFE680;
+        text-shadow: 0 0 10px rgba(255,215,0,0.5);
+      }
+      
+      /* Gallery card image animation on load */
+      .gallery-card img {
+        animation: fadeInUp 0.8s ease-out;
+      }
+      
+      /* Feature box text animation */
+      .feature-box h4 {
+        transition: all 0.3s ease;
+      }
+      
+      .feature-box:hover h4 {
+        animation: float 1.5s ease-in-out infinite;
+      }
+      
+      /* Audio Player Styling */
+      .music-player {
+        background: linear-gradient(135deg, rgba(139,69,19,0.8) 0%, rgba(210,105,30,0.8) 100%);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 2px solid #FFD700;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        animation: fadeInUp 0.8s ease-out;
+      }
+      
+      .music-player h2 {
+        font-size: 1.8rem;
+        color: #FFD700;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      }
+      
+      .music-player p {
+        color: #eee;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+      
+      audio {
+        width: 100%;
+        height: 50px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.1);
+        accent-color: #FFD700;
+      }
+      
+      audio:hover {
+        box-shadow: 0 0 20px rgba(255,215,0,0.4);
+      }
     </style>
   </head>
   <body>
-    <main class="card">
-      <h1>🦁 Il leone</h1>
-      <div class="svg-wrap" aria-hidden="true">
-        <!-- Illustrazione inline: mantiene compatibilità per chi non carica immagini esterne -->
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrazione stilizzata di un leone">
-          <defs>
-            <circle id="face" cx="100" cy="100" r="40" />
-          </defs>
-          <g fill="#E2A83F"><circle cx="100" cy="100" r="64"/></g>
-          <g fill="#F5D39A"><use href="#face" /></g>
-          <g fill="#3b2b2b"><ellipse cx="88" cy="94" rx="4" ry="6" /><ellipse cx="112" cy="94" rx="4" ry="6" /></g>
-          <g fill="#6b3b2b"><path d="M98 106 Q100 110 102 106 Q100 112 98 106" /><ellipse cx="100" cy="106" rx="6" ry="4"/></g>
-          <path d="M90 116 Q100 123 110 116" stroke="#6b3b2b" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
+    <!-- Header Hero -->
+    <header>
+      <h1>🦁 IL LEONE</h1>
+      <p>Re incontrastato della savana africana</p>
+    </header>
 
-      <figure style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:1.5rem 0">
-        <div style="text-align:center">
-          <img src="images/lion_namibia.jpg" alt="Leone in Namibia (Wikimedia Commons)" style="width:100%;border-radius:8px;border:1px solid #ddd;box-shadow:0 2px 8px rgba(0,0,0,.1)"/>
-          <figcaption style="font-size:.85rem;color:#666;margin-top:.5rem">Leone in Namibia</figcaption>
+    <div class="container">
+      <!-- Music Player -->
+      <section class="music-player">
+        <h2>🎵 The Lion Sleeps Tonight</h2>
+        <p>Ascolta questa meravigliosa canzone mentre scopri i segreti di questo maestoso felino</p>
+        <audio controls>
+          <source src="https://upload.wikimedia.org/wikipedia/commons/6/62/The_Lion_Sleeps_Tonight.ogg" type="audio/ogg">
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+          Il tuo browser non supporta l'elemento audio.
+        </audio>
+      </section>
+
+      <!-- Galleria Principale -->
+      <section class="gallery-section">
+        <h2 class="gallery-title">Maestose immagini</h2>
+        <div class="gallery">
+          <div class="gallery-card">
+            <img src="images/leone1.png" alt="Leone dall'Africa"/>
+            <div class="gallery-caption">Leone africano (da Wikipedia)</div>
+          </div>
+          <div class="gallery-card">
+            <img src="images/leone2 copy.png" alt="Leone maestoso"/>
+            <div class="gallery-caption">Re della savana</div>
+          </div>
+          <div class="gallery-card">
+            <img src="images/leone0.png" alt="Ritratto di leone"/>
+            <div class="gallery-caption">Maestà selvaggia</div>
+          </div>
         </div>
-        <div style="text-align:center">
-          <img src="images/lion_african.jpg" alt="Leone africano (Wikimedia Commons)" style="width:100%;border-radius:8px;border:1px solid #ddd;box-shadow:0 2px 8px rgba(0,0,0,.1)"/>
-          <figcaption style="font-size:.85rem;color:#666;margin-top:.5rem">Leone africano</figcaption>
+      </section>
+
+      <!-- Sezione Caratteristiche Fisiche -->
+      <section class="content-section">
+        <h2>🦁 Caratteristiche fisiche</h2>
+        <p>
+          Il leone (Panthera leo) è il secondo felino più grande del mondo, dopo la tigre. I maschi adulti pesano tra i 180 e i 250 chilogrammi, mentre le femmine sono più piccole, pesando tra i 130 e i 180 chilogrammi. La lunghezza del corpo varia dai 170 ai 250 centimetri, con una coda lunga 90-140 centimetri.
+        </p>
+        <p>
+          La caratteristica più distintiva nei maschi è la <strong>criniera</strong>, una folta massa di peli che circonda la testa e il collo. Una criniera scura e folta indica spesso un maschio in salute e più dominante. Le femmine non posseggono una criniera cospicua, pur avendo un aspetto altrettanto affascinante.
+        </p>
+        
+        <div class="features">
+          <div class="feature-box">
+            <h4>Peso</h4>
+            <p><strong>180-250 kg</strong> (maschi)<br>130-180 kg (femmine)</p>
+          </div>
+          <div class="feature-box">
+            <h4>Lunghezza</h4>
+            <p><strong>170-250 cm</strong> corpo<br>90-140 cm coda</p>
+          </div>
+          <div class="feature-box">
+            <h4>Velocità</h4>
+            <p><strong>60 km/h</strong> in brevi scatti</p>
+          </div>
+          <div class="feature-box">
+            <h4>Speranza di vita</h4>
+            <p><strong>12-16 anni</strong> in natura</p>
+          </div>
         </div>
-        <div style="text-align:center">
-          <img src="images/lion_portrait.jpg" alt="Ritratto di leone (Wikimedia Commons)" style="width:100%;border-radius:8px;border:1px solid #ddd;box-shadow:0 2px 8px rgba(0,0,0,.1)"/>
-          <figcaption style="font-size:.85rem;color:#666;margin-top:.5rem">Ritratto leone</figcaption>
+      </section>
+
+      <!-- Sezione Habitat -->
+      <section class="content-section">
+        <h2>🌍 Habitat e distribuzione</h2>
+        <p>
+          I leoni abitano principalmente le <strong>savane, le praterie e le aree semi-aride</strong> dell'Africa subsahariana. Si trovano in vari habitat che comprendono foreste aperte, zone umide e deserti, purché dispongano di acqua e di una sufficiente popolazione di prede.
+        </p>
+        <p>
+          Storicamente, i leoni erano distribuiti in tutta l'Africa e persino in parti dell'Asia. Oggi la loro distribuzione è frammentata. La maggior parte dei leoni si trova in paesi come la <strong>Tanzania, il Botswana, la Namibia, lo Zambia, il Kenya e il Sud Africa</strong>. Una piccola popolazione vive nella Foresta di Gir in India.
+        </p>
+        <p>
+          I leoni preferiscono habitat aperti dove possono cacciare e comunicare facilmente, evitando le foreste dense dove la visibilità è limitata.
+        </p>
+      </section>
+
+      <!-- Sezione Alimentazione -->
+      <section class="content-section">
+        <h2>🍖 Alimentazione e caccia</h2>
+        <p>
+          Il leone è un <strong>carnivoro stretto e predatore apice</strong> nelle sue aree di distribuzione. Si alimenta principalmente di mammiferi grandi e medi come <strong>zebre, gazzelle, gnu, bufali e facoceri</strong>. Occasionalmente caccia anche animali più piccoli e può usurpare le uccisioni di altri predatori.
+        </p>
+        <p>
+          Un leone adulto necessita di circa <strong>5-7 chilogrammi di carne al giorno</strong>. Le femmine svolgono la maggior parte della caccia, spesso cooperando in gruppi coordinati per abbattere prede grandi. Questa tattica cooperativa consente loro di catturare animali molto più grandi di quanto sarebbe possibile da sole.
+        </p>
+        <p>
+          I leoni sono predatori principalmente <strong>notturni</strong>, quando le temperature sono più basse e la loro eccellente visione notturna è un vantaggio decisivo. Possono raggiungere velocità di 60 chilometri all'ora in brevi scatti, anche se la resistenza non è loro forza.
+        </p>
+      </section>
+
+      <!-- Sezione Comportamento Sociale -->
+      <section class="content-section">
+        <h2>👥 Società e branco</h2>
+        <h3>Uniche fra i felini</h3>
+        <p>
+          I leoni sono <strong>gli unici felini veramente sociali</strong> e vivono in gruppi chiamati branchi (pride). Un branco tipico consiste di 5-30 individui, anche se sono stati documentati branchi più grandi.
+        </p>
+        <h3>Struttura del branco</h3>
+        <p>
+          I branchi sono generalmente composti da <strong>femmine imparentate tra loro</strong> (madri, figlie, sorelle, cugine) e dai loro cuccioli, insieme a uno o più maschi adulti residenti. Le femmine rimangono nel loro branco nativo per tutta la vita, creando una struttura matriarcale stabile.
+        </p>
+        <p>
+          I maschi, invece, si associano al branco solo per un periodo di <strong>2-4 anni</strong> prima di essere sloggiati da maschi più giovani. I maschi che si alleano tra loro hanno una migliore possibilità di mantenere il controllo del territorio.
+        </p>
+        
+        <div class="features">
+          <div class="feature-box">
+            <h4>Membri per branco</h4>
+            <p><strong>5-30 individui</strong> in media</p>
+          </div>
+          <div class="feature-box">
+            <h4>Territorio</h4>
+            <p><strong>20-400 km²</strong> per branco</p>
+          </div>
+          <div class="feature-box">
+            <h4>Composizione</h4>
+            <p><strong>Matriarcale</strong> - femmine permanenti</p>
+          </div>
+          <div class="feature-box">
+            <h4>Tempo maschi</h4>
+            <p><strong>2-4 anni</strong> nel branco</p>
+          </div>
         </div>
-      </figure>
-      <p class="meta" style="text-align:center;font-size:.85rem;margin-top:1rem">Immagini dalla <a href="https://commons.wikimedia.org/" style="color:#0066cc;text-decoration:none">Wikimedia Commons</a></p>
+      </section>
 
-      <p class="meta">Descrizione breve</p>
-      <p>
-        Il leone (Panthera leo) è un grande felino noto per la sua criniera e il ruolo di predatore apice nelle savane e nelle praterie dell'Africa subsahariana. I leoni vivono in gruppi sociali chiamati branchi, guidati da femmine parenti tra loro; i maschi proteggono il territorio e i cuccioli.
-      </p>
+      <!-- Sezione Comunicazione -->
+      <section class="content-section">
+        <h2>🔊 Comunicazione e ruggio</h2>
+        <p>
+          Il <strong>ruggito</strong> è la forma di comunicazione più famosa del leone ed è uno dei versi più forti di qualsiasi felino, <strong>udibile fino a 9 chilometri di distanza</strong>. I leoni utilizzano il ruggito per comunicare con altri membri del branco, per integrare i dispersi e, soprattutto, per avvertire altri branchi di stare lontani dal loro territorio.
+        </p>
+        <p>
+          Il ruggito è più forte e frequente durante la notte ed è spesso un'attività di gruppo nel branco. Oltre al ruggito, i leoni utilizzano grugniti, sbuffi, miagolii e sputi per comunicare. Il contatto fisico tra membri del branco è un'importante forma di legame sociale.
+        </p>
+        <p>
+          I maschi marcano il territorio sia con l'<strong>urina che con le feci</strong>, spesso raschiando il terreno con le zampe posteriori per distribuire i loro odori su area sempre più vaste.
+        </p>
+      </section>
 
-      <p>
-        Sono carnivori opportunisti: cacciano erbivori di medie e grandi dimensioni, spesso con tattiche di cooperazione tra le femmine. Il loro verso caratteristico è il ruggito, udibile a grandi distanze e utilizzato per comunicare e marcare il territorio.
-      </p>
+      <!-- Sezione Riproduzione -->
+      <section class="content-section">
+        <h2>👶 Riproduzione e ciclo vitale</h2>
+        <p>
+          Le leonesse diventano sessualmente mature intorno ai <strong>3-4 anni di età</strong> e possono riprodursi tutto l'anno, anche se ci sono picchi stagionali in alcune aree. Una femmina di solito partorisce da <strong>1 a 4 cuccioli</strong>, con una media di 2-3.
+        </p>
+        <p>
+          I cuccioli nascono molto vulnerabili e rimangono nascosti dalla madre per le prime settimane di vita. Iniziano a mangiare carne a circa 3 mesi di età, anche se continuano ad allattarsi fino a circa 6-7 mesi. L'allattamento incrociato è comune nelle leonesse del branco.
+        </p>
+        <p>
+          I cuccioli rimangono con il branco fino a circa <strong>2-3 anni di età</strong>, quando i giovani maschi vengono di solito cacciati dalla coalizione dei maschi dominanti. I maschi esiliati si uniscono ad altri maschi per formare bande nomadiche.
+        </p>
+      </section>
 
-      <p>
-        Il leone è anche simbolo culturale: rappresenta forza, coraggio e regalità in molte tradizioni umane. Tuttavia molte popolazioni di leoni sono minacciate da perdita di habitat, conflitti con l'uomo e caccia.
-      </p>
+      <!-- Sezione Conservazione -->
+      <section class="content-section">
+        <h2>⚠️ Conservazione e minacce</h2>
+        <p>
+          Il leone è classificato come <strong>Vulnerabile</strong> dall'Unione Internazionale per la Conservazione della Natura (IUCN). La popolazione di leoni è diminuita drasticamente nel corso dei secoli, e continua a declinare. Nei due ultimi decenni, si stima che la popolazione sia diminuita di quasi il <strong>50%</strong>.
+        </p>
+        <h3>Principali minacce</h3>
+        <ul style="margin-left: 1.5rem; color: #ddd;">
+          <li style="margin-bottom: 0.8rem;"><strong>Perdita di habitat</strong> dovuta allo sviluppo umano, agricoltura e urbanizzazione</li>
+          <li style="margin-bottom: 0.8rem;"><strong>Riduzione delle prede</strong> causata dal bracconaggio</li>
+          <li style="margin-bottom: 0.8rem;"><strong>Conflitti uomo-leone</strong> quando i leoni predano il bestiame</li>
+          <li style="margin-bottom: 0.8rem;"><strong>Caccia sportiva</strong> (regolamentata ma ancora praticata)</li>
+          <li style="margin-bottom: 0.8rem;"><strong>Malattie</strong> come la rogna e il parvovirus</li>
+        </ul>
+        <p style="margin-top: 1.5rem;">
+          Sforzi di conservazione come la gestione degli habitat, la protezione dalle uccisioni illegali, la ricerca e l'educazione sono essenziali per la sopravvivenza a lungo termine della specie.
+        </p>
+      </section>
 
-      <p class="meta">Vuoi aprirlo nel browser? Apri il file <a href="index.html">index.html</a>.</p>
-    </main>
+      <!-- Sezione Cultura -->
+      <section class="content-section">
+        <h2>🏛️ Ruolo culturale e simbolismo</h2>
+        <p>
+          Il leone ha una <strong>profonda importanza culturale</strong> in molte società umane, sin dall'antichità. È stato un simbolo di <strong>forza, coraggio, maestà e nobiltà</strong> in molte culture, dalla mitologia greca e romana al simbolismo cristiano.
+        </p>
+        <p>
+          Appare negli stemmi di numerose nazioni, città e istituzioni. Nella cultura africana, il leone è spesso considerato il <strong>re degli animali</strong> e occupa un luogo speciale nei miti, nelle leggende e nei rituali delle comunità indigene.
+        </p>
+        <p>
+          Oggi il leone rimane uno degli animali più iconici e amati al mondo, con un ruolo importante nel turismo e nella sensibilizzazione sulla conservazione della fauna selvatica.
+        </p>
+      </section>
+    </div>
+
+    <footer>
+      <p><strong>Il Leone - Panthera leo</strong></p>
+      <p>Una celebrazione del più maestoso felino del pianeta</p>
+    </footer>
   </body>
 </html>
