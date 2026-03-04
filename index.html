@@ -596,9 +596,66 @@
       </section>
     </div>
 
+      <!-- Sezione QR Code del sito -->
+      <section class="content-section" id="qr-section">
+        <h2>🔗 QR code del sito</h2>
+        <p>Scansiona questo codice per aprire il sito da un dispositivo mobile o scaricalo come immagine.</p>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+          <div id="qr" aria-label="QR code del sito"></div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <button id="download-qr" style="padding:0.5rem 1rem;border-radius:8px;border:none;background:#D2691E;color:#fff;cursor:pointer;">Scarica PNG</button>
+            <button id="refresh-qr" style="padding:0.5rem 1rem;border-radius:8px;border:none;background:#8B4513;color:#fff;cursor:pointer;">Rigenera</button>
+          </div>
+        </div>
+      </section>
+
     <footer>
       <p><strong>Il Leone - Panthera leo</strong></p>
       <p>Una celebrazione del più maestoso felino del pianeta</p>
     </footer>
+    
+    <!-- Library QRCode (minima) + script per generare e scaricare -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+      function makeQRCode(text) {
+        const container = document.getElementById('qr');
+        container.innerHTML = '';
+        const q = new QRCode(container, {
+          text: text || window.location.href,
+          width: 200,
+          height: 200,
+          colorDark: '#111',
+          colorLight: '#fff',
+          correctLevel: QRCode.CorrectLevel.H
+        });
+        return q;
+      }
+
+      // genera al caricamento
+      document.addEventListener('DOMContentLoaded', () => {
+        makeQRCode(window.location.href);
+        document.getElementById('refresh-qr').addEventListener('click', () => makeQRCode(window.location.href));
+
+        document.getElementById('download-qr').addEventListener('click', () => {
+          // il QRCode genera un <img> o <canvas> all'interno del container
+          const container = document.getElementById('qr');
+          const img = container.querySelector('img');
+          const canvas = container.querySelector('canvas');
+          let dataUrl = null;
+          if (canvas) dataUrl = canvas.toDataURL('image/png');
+          else if (img) {
+            // convertire immagine base64 in dataUrl
+            dataUrl = img.src;
+          }
+          if (!dataUrl) return alert('Impossibile generare immagine QR.');
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = 'qr-il-leone.png';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        });
+      });
+    </script>
   </body>
 </html>
